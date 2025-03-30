@@ -1,0 +1,223 @@
+<!-- <!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width">
+	  <title>replit</title>
+	  <link href="style.css" rel="stylesheet" type="text/css" />
+	</head>
+	
+	<body>
+		<h1 class="todo">Todo list</h1>
+		<h4 class="todo">1. Take class</h4>
+		<h4 class="todo">2. Go out to eat</h4>
+		<h4 class="todo">Go to gym</h4>
+
+        <h1 id="count"></h1>
+		<div>
+			<input type="text" placeholder="Add your todo here..."></input>
+			<button id="btn" onclick="addTodo()">Add Todo</button>
+		</div>
+
+
+      <!- ================================================= -->
+	  <!-- <script>
+        function addTodo() {
+        // const id = document.querySelector("printSomthing");
+        const inputEl = document.querySelector("input");
+        const value = inputEl.value;
+        console.log(value);
+        }
+        console.log("value");
+      </script> --
+
+      <script src="script.js">
+        // const count = document.querySelector("#count");
+        // const num = 1;
+        // count.innerHTML = num;
+        // const update = setInterval( () => {
+        //     num++;
+        //     count.innerHTML = num;
+        // }, 1000);
+
+        // // setInterval( () => {
+        // //     count.innerHTML = num;
+        // // })
+      </script>
+	</body>
+	
+</html> -->
+
+  <!-- ===================================================================== -->
+  <!-- ===================================================================== -->
+  <!-- ===================================================================== -->
+
+
+<!-- <!DOCTYPE html>
+  <html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  
+  <body>
+    <h1>Todo list</h1>
+    <div id="todoParent">
+      <div id="todo-1" style="display: flex;">
+        <h4>1. Take class</h4>
+        <button onclick="deleteTodo(1)">delete</button>
+      </div>
+      <div id="todo-2" style="display: flex;">
+        <h4>2. Go out to eat</h4>
+        <button onclick="deleteTodo(2)">delete</button>
+      </div>
+    </div>
+    <div>
+      <input type="text"></input>
+      <button>Add Todo</button>
+    </div>
+
+  </body>
+  
+  <script>
+    function deleteTodo(index) {
+      const element = document.getElementById("todo-" + index);
+      element.parentNode.removeChild(element);
+    }
+  </script>
+  </html> -->
+
+
+  <!-- ===================================================================== -->
+  <!-- ===================================================================== -->
+  <!-- ===================================================================== -->
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Todo list</h1>
+  <div id="todoParent">
+    <div id="todo-1" style="display: flex;">
+      <h4>1. Take class</h4>
+      <button onclick="deleteTodo(1)">delete</button>
+    </div>
+    <div id="todo-2" style="display: flex;">
+      <h4>2. Go out to eat</h4>
+      <button onclick="deleteTodo(2)">delete</button>
+    </div>
+  </div>
+  <div>
+    <input type="text"></input>
+    <button>Add Todo</button>
+  </div>
+</body>
+
+<script>
+  function deleteTodo(index) {
+    const element = document.getElementById("todo-" + index);
+    document.getElementById("todoParent").removeChild(element);
+  }
+</script>
+
+</html> -->
+
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Todo 1</h2>
+  <h2>Todo 2</h2>
+  <h2>Todo 3</h2>
+  <button onclick="deleteRandomTodo()">Updating todo!</button>
+
+
+ 
+</body>
+  <script>
+    function deleteRandomTodo() {
+      const element = document.querySelector("h2");
+      const parentElement = element.parentNode;
+      parentElement.removeChild(element);
+    }
+
+  </script>
+</html>
+ -->
+
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+
+
+<!-- <html>
+  <head>
+    
+  </head>
+  <body>
+    <h1>hi there</h1>
+  </body>
+
+  <script>
+    const creatEl = document.createElement("h1");
+    creatEl.innerHTML = "hi there";
+    const parentEl = document.querySelector("body");
+    parentEl.appendChild(creatEl);
+  </script>
+</html> -->
+
+<!-- =========================================================================== -->
+<!-- =========================================================================== -->
+
+<html>
+  <head>
+  </head>
+  <body>
+    <input type="text"></input>
+    <button onclick="addTodo()">Add Todo!</button>
+  </body>
+  <script>
+    let ctr = 1;
+    function deleteTodo(index) {
+      const element = document.getElementById(index);
+      element.parentNode.removeChild(element);
+    }
+    
+    function addTodo() {
+      const inputEl = document.querySelector("input");
+      const value = inputEl.value;
+
+      const creatEl = document.createElement("div");
+      creatEl.setAttribute("id", ctr);
+      
+      creatEl.innerHTML = "<div>" + value + "</div> <button onclick='deleteTodo("+ ctr +")'>Delete</button>";
+      ctr += 1;
+
+      const parentEl = document.querySelector("body");
+      parentEl.appendChild(creatEl);
+    }
+  </script>
+</html>
+
+
+
