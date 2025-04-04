@@ -237,19 +237,21 @@
 // p.then(callback);
 
 // // ============================================
-// function doTimeCall(resolve) {
-//     console.log("hyy");
-// }
 
-// function setTimeoutAsync() {
-//     return new Promise(doTimeCall);
-// }
+function doTimeCall(resolve) {
+    console.log("hyy");
+    resolve();
+}
 
-// const p = setTimeoutAnync();
+function setTimeoutAsync() {
+    return new Promise(doTimeCall);
+}
 
-// p.then(function() {
-//     console.log("hi");
-// })
+const p = setTimeoutAsync();
+
+p.then(function() {
+    console.log("hi");
+})
 
 
 // // ============================================

@@ -57,6 +57,8 @@
 // fsa.readFile("b.txt", "utf-8", print); // asynchornously
 // console.log("Done");
 
+
+
 // ===========================================================================
 // ===========================================================================
 
@@ -92,22 +94,22 @@
 // ===========================================================================
 // ===========================================================================
 
-function timeout() {
-    console.log("Click the button!");
-}
+// function timeout() {
+//     console.log("Click the button!");
+// }
 
-console.log("Hi");
+// console.log("Hi");
 
-setTimeout(timeout, 1000);
+// setTimeout(timeout, 1000);
 
-console.log("Welcome to loupe.");
+// console.log("Welcome to loupe.");
 
-let c = 0;
-for(let i=0; i<10000000000; i++) {
-    c += 1;
-} 
+// let c = 0;
+// for(let i=0; i<10000000000; i++) {
+//     c += 1;
+// } 
 
-console.log("Expensive operation done");
+// console.log("Expensive operation done");
 
 
 
