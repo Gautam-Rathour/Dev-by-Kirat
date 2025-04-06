@@ -3,11 +3,11 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
     </head>
-    <body>
+    <body style="background-color: black; color:white;">
 
         Posts
         <div id="posts"></div>
-
+        <button onClick="getRecentPost()">Fetch latest posts</button>
         <script>
             // async function getRecentPost() {
             //     console.log("before sending request");
@@ -20,11 +20,14 @@
             
 
             async function getRecentPost() {
-                const response = await axios.get("https://jsonplaceholder.typicode.com/posts/2");
-                document.getElementById("posts").innerHTML = response.data.body;
+                const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+                const arr = response.data;
+                for(let i=0; i<arr.length; i++) {
+                    document.getElementById("posts").innerHTML += ("<div>" + arr[i].body + "</div>" );
+                } 
             }
 
-            getRecentPost();
+            // getRecentPost();
         </script>
     </body>
 </html>
