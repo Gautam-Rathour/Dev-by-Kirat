@@ -3,6 +3,8 @@ const express = require("express");
 
 const app = express();
 
+
+//better routing, add database, middlwares
 app.get("/add/:a/:b", function(req, res) {
     const a = parseInt(req.params.a);
     const b = parseInt(req.params.b);
@@ -39,7 +41,7 @@ app.get("/divide/:a/:b", function(req, res) {
     })
 })
 
-app.listen(3001);
+app.listen(3000);
 
 
 // =======================================================================
