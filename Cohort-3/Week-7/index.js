@@ -54,7 +54,7 @@ app.post("/signin", async function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const response = await UserModel.findOne({
+    const response = await UserModel.find({
         email: email,
     })
 
@@ -87,8 +87,8 @@ app.post("/todo", auth, function(req, res) {
     const title = req.body.title;
 
     TodoModel.create({
-        title,
-        userId
+        title: title,
+        userId: userId
     })
 
     res.json({
