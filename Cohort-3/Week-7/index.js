@@ -1,17 +1,22 @@
 
 const express = require("express");
 const { UserModel, TodoModel } = require("./db");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+
+const JWT_SECRET = "ILoveKirat"
 
 
+mongoose.connect("mongodb+srv://gautam:Gautam%40123@cluster0.obw8w.mongodb.net/todo-app-database-new")
 const app = express();
 app.use(express.json());
 
-app.post("/signup", function(req, res) {
+app.post("/signup", async function(req, res) {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
     
-    UserModel.insert({
+    await UserModel.create({
         name: name,
         email: email,
         password: password
@@ -22,7 +27,29 @@ app.post("/signup", function(req, res) {
     })
 })
 
-app.post("/signin", function(req, res) {
+app.post("/signin", async function(req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const user = await UserModel.findOne({
+        email: email,
+        password: password
+    })
+
+    consle.log(user)
+
+    if(user) {
+        const token = jwt.sign({
+            id: user._id
+        }, JWT_SECRET)
+        res.json({
+            token: token
+        })
+    } else {
+        res.status(404).send({
+            massage: "Invalid email or password"
+        })
+    }
     
 })
 
