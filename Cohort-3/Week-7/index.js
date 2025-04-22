@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const JWT_SECRET = "ILoveKirat"
 
 
-mongoose.connect("mongodb+srv://gautam:Gautam%40123@cluster0.obw8w.mongodb.net/todo-app-database-new")
+mongoose.connect("mongodb+srv://gautam:Gautam%40123@cluster0.obw8w.mongodb.net/todo-app-database-new");
+
 const app = express();
 app.use(express.json());
 
@@ -36,30 +37,66 @@ app.post("/signin", async function(req, res) {
         password: password
     })
 
-    consle.log(user)
+    console.log(user)
 
     if(user) {
         const token = jwt.sign({
-            id: user._id
+            id: user._id.toString()
         }, JWT_SECRET)
         res.json({
             token: token
         })
     } else {
-        res.status(404).send({
+        res.status(403).send({
             massage: "Invalid email or password"
         })
     }
     
 })
 
-app.post("/todo", function(req, res) {
+app.post("/todo", auth, function(req, res) {
+    const userId = req.userId;
+    const title = req.body.title;
+
+    TodoModel.create({
+        title,
+        userId
+    })
+
+    res.json({
+        userId: userId
+    })
     
 })
 
-app.get("/todos", function(req, res) {
-    
+app.get("/todos", auth, async function(req, res) {
+    const userId = req.userId;
+    const todos = await TodoModel.find({
+        userId: userId
+    })
+
+    res.json({
+        userId: userId
+    })
 })
+
+
+function auth(req, res, next) {
+    const token = req.headers.token;
+
+    const decodedData = jwt.verify(token, JWT_SECRET);
+
+    if(decodedData) {
+        req.userId = decodedData.id;
+        next();
+    } else {
+        res.staus(403).send({
+            massage: "Invalid token"
+        })
+    }
+}
+
+
 
 
 app.listen(3000);
