@@ -4,6 +4,7 @@ const express = require("express");
 const { UserModel, TodoModel } = require("./db");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const z = require("zod");
 
 const JWT_SECRET = "ILoveKirat"
 
@@ -14,9 +15,16 @@ const app = express();
 app.use(express.json());
 
 app.post("/signup", async function(req, res) {
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
+    const requiredBody = z.object({
+        name: string().min(5).max(50),
+        email: string().min(5).max(50).email(),
+        password: string().min(8).max(60)
+
+    })
+    const name = req.body.name;  // string , min-60
+    const email = req.body.email;  // string, @ , max-50
+    const password = req.body.password;  //string, min-10
+
 
     const hashedPassword = await bcrypt.hash(password, 5);
     console.log(hashedPassword);
@@ -36,23 +44,29 @@ app.post("/signin", async function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    const user = await UserModel.findOne({
+    const response = await UserModel.findOne({
         email: email,
-        password: password
     })
 
-    console.log(user)
+    if(!response) {
+        res.status(403).send({
+            massage: "User does not exist in our db"
+        })
+    }
 
-    if(user) {
+    const passwordMatch = await bcrypt.compare(password, response.password);
+
+    if(passwordMatch) {
         const token = jwt.sign({
-            id: user._id.toString()
-        }, JWT_SECRET)
+            id: response._id.toString()
+        }, JWT_SECRET);
+
         res.json({
             token: token
         })
     } else {
         res.status(403).send({
-            massage: "Invalid email or password"
+            message: "Invalid password"
         })
     }
     
