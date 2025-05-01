@@ -5,7 +5,10 @@
 const { Router } = require("express");
 const { userModel } = require("../db");
 const { z } = require("zod");
-const { bcrypt } = require("bcrypt");
+const  bcrypt  = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const JWT_USER_PASSWORD = "iloveeveryone";
 
 const userRouter = Router();
 
@@ -15,17 +18,17 @@ const userRouter = Router();
 
         // TODO: adding zod validation
         const requiredBody = z.object({
-            email: String().min(5).max(20).email(),
-            password: String().min(5).max(20),
-            firstName: String().min(5).max(30),
-            lastName: String().min(5).max(10)
+            email: z.string().min(5).max(50).email(),
+            password: z.string().min(5).max(20),
+            firstName: z.string().min(5).max(30),
+            lastName: z.string().min(5).max(10)
         });
 
         const parseDataWithSuccess = requiredBody.safeParse(req.body);
 
         if(!parseDataWithSuccess.success) {
             res.send({
-                message: "Invalid formate",
+                message: "Invalid format",
                 error: parseDataWithSuccess.error
             })
             return;
@@ -46,10 +49,40 @@ const userRouter = Router();
         })
     })
     
-    userRouter.post("/signin", function(req, res) {
+    userRouter.post("/signin", async function(req, res) {
+        const { email, password } = req.body;
+
+        const matchEmail = await userModel.findOne({
+            email: email
+        })
+
+        if(!matchEmail) {
+            res.status(403).send({
+                massage: "User is not exist in out DataBase."
+            })
+        }
+
+        const passwordMatch = await bcrypt.compare(password, matchEmail.password);
+
+        if(passwordMatch) {
+            const token = jwt.sign({
+                id: matchEmail._id.toString()
+            }, JWT_USER_PASSWORD)
+            
+            // Do cookie logic
+
+            res.send({
+                token: token
+            })
+        } else {
+            res.status(403).send({
+                message: "Incorrect credentials"
+            })
+        }
+
 
         res.json({
-            message: "signin endpoint"
+            message: "signin successfully!"
         })
     })
     
