@@ -8,6 +8,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_ADMIN_PASSWORD } = require("../config");
 
+const { adminMiddleware } = require('../middleware/admin');
+
+
 
 // auth, jsonwebtoken, zod
 
@@ -104,18 +107,61 @@ adminRouter.post("/course", adminMiddleware, async function(req, res) {
     })
 })
 
-adminRouter.put("/course", function(req, res) {
+adminRouter.put("/course", adminMiddleware, async function(req, res) {
+    const adminId = req.userId;
+
+    const { title, description, imageUrl, price, courseId } = req.body;
+
+    // Learn how user can send image the place of imageUrl --
+    const course = await courseModel.updateOne({
+        _id: courseId, // flying beast id
+        creatorId: adminId // creatorIdL: flyingBeast
+    }, {
+        title: title,
+        description: description,
+        imageUrl:imageUrl,
+        price: price,
+        creatorId: adminId
+    })
+
     res.json({
-        message: "signin endpoint"
+        message: "Course updated",
+        courseId: course._id
     })
 })
 
-adminRouter.get("/course/bulk", function(req, res) {
+adminRouter.get("/course/bulk", adminMiddleware, async function(req, res) {
+    const adminId = req.userId;
+
+
+    const courses = await courseModel.find({
+        creatorId: adminId 
+    });
+
     res.json({
-        message: "signin endpoint"
+        message: "Courses",
+        // courses
     })
 })
+
 
 module.exports = {
     adminRouter: adminRouter
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
