@@ -2,12 +2,12 @@
 
 const { Router } = require("express");
 const adminRouter = Router();
-const { adminModel } = require("../db");
+const { adminModel, courseModel } = require("../db");
 const { z } = require("zod");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { JWT_ADMIN_PASSWORD } = require("../config");
 
-const JWT_ADMIN_PASSWORD = "iloveonlyadmin";
 
 // auth, jsonwebtoken, zod
 
@@ -85,9 +85,22 @@ adminRouter.post("/signin", async function(req, res) {
         })
 })
 
-adminRouter.post("/course", function(req, res) {
+adminRouter.post("/course", adminMiddleware, async function(req, res) {
+    const adminId = req.userId;
+
+    const { title, description, imageUrl, price } = req.body;
+
+    // Learn how user can send image the place of imageUrl --
+    const course = await courseModel.create({
+        title: title,
+        description: description,
+        imageUrl:imageUrl,
+        price: price,
+        creatorId: adminId
+    })
     res.json({
-        message: "signin endpoint"
+        message: "Course created",
+        courseId: course._id
     })
 })
 
