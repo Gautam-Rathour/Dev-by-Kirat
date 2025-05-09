@@ -1,40 +1,50 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+// conditinal rendering
 function App() {
-
-  return ( <div>
-        <b>
-          hi there..
-        </b>
-        <Counter></Counter>
-    </div>
-  )
-}
-
-function Counter() {
-
+  let [counterVisible, setCounterVisible] = useState(true);
   const [count, setCount] = useState(0);
 
-  function increaseCount() {
-    setCount(count + 1);
-  }
-
-  function decreaseCount() {
-    setCount(count - 1);
-  }
-
-  function reset() {
-    setCount(count - count);
-  }
+  useEffect(function() {
+    setInterval(function() {
+      setCounterVisible(c => !c)
+      let clock = setInterval(function() {
+        console.log("from inside setInterval");
+        setCount(count => count + 1);
+      }, 1000)  
+  
+      return function () {
+        console.log("on unmount");
+        clearInterval(clock);
+      }
+    }, 5000);
+    
+  }, [])
 
   return <div>
-    <h1 id="text">{count}</h1>
-    <button onClick={increaseCount}>Increase count +</button>
-    <button onClick={decreaseCount}>Decrease count -</button>
+        hi
+        <Counter count={count}></Counter>
+        hello
+    </div>
+}
 
-    <button onClick={reset}>Reset</button>
 
+// mounting, re-rendering, unmounting
+function Counter() {
+
+
+
+
+  useEffect(function(props) {
+    console.log("on mount");
+    
+  }, []) // dependency array, cleanup, fetch indide useEffect
+
+
+
+  return <div>
+    <h1 id="text">{props.count}</h1>
   </div>
 }
 export default App
