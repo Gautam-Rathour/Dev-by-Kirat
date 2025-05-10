@@ -1,50 +1,52 @@
 
+
 import { useState, useEffect } from 'react';
 
-// conditinal rendering
+// Re-learning Cleanup, useEffect. Learning about dependency array
 function App() {
-  let [counterVisible, setCounterVisible] = useState(true);
   const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(0);
 
-  useEffect(function() {
-    setInterval(function() {
-      setCounterVisible(c => !c)
-      let clock = setInterval(function() {
-        console.log("from inside setInterval");
-        setCount(count => count + 1);
-      }, 1000)  
-  
-      return function () {
-        console.log("on unmount");
-        clearInterval(clock);
-      }
-    }, 5000);
-    
-  }, [])
+  function increase () {
+    setCount(c => c + 1);
+  }
+
+  function decrease () {
+    setCount2(c => c - 1);
+  }
+
 
   return <div>
-        hi
-        <Counter count={count}></Counter>
-        hello
-    </div>
+    <Counter count={count}  count2={count2}/>
+    <button onClick={increase}>Home</button>
+    <button onClick={decrease}>Notifications</button>
+  </div>
 }
 
-
 // mounting, re-rendering, unmounting
-function Counter() {
+function Counter(props) {
+
+  useEffect(function() {
+    console.log("mount");
+
+    return function() {
+      console.log("unmount");
+    }
+  }, []);
 
 
+  useEffect(function() {
+    console.log("count has changed");
 
-
-  useEffect(function(props) {
-    console.log("on mount");
-    
-  }, []) // dependency array, cleanup, fetch indide useEffect
-
+    return function() {
+      console.log("cleanup inside second effect");
+    }
+  }, [props.count]);
 
 
   return <div>
-    <h1 id="text">{props.count}</h1>
+    Counter1 {props.count} <br/>
+    Counter2 {props.count2} <br/>
   </div>
 }
 export default App
