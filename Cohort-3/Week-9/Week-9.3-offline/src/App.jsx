@@ -290,39 +290,268 @@
 // =====================================================================================================================
 
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
-function App() {
-  const [showTimer, setShowTimer] = useState(true);
+// function App() {
+//   const [showTimer, setShowTimer] = useState(true);
 
-  useEffect(() => {
-    setInterval(function() {
-      setShowTimer(currentValue => !currentValue);
-    }, 5000)
-  }, [])
-  return <div>
-     { showTimer && <Timer/> }
-  </div>
-}
+//   useEffect(() => {
+//     setInterval(function() {
+//       setShowTimer(currentValue => !currentValue);
+//     }, 5000)
+//   }, [])
+//   return <div>
+//      { showTimer && <Timer/> }
+//   </div>
+// }
 
-const Timer = function() {
-  const [seconds, setSeconds] = useState(0);
+// const Timer = function() {
+//   const [seconds, setSeconds] = useState(0);
 
-  useEffect(function() {
-    let clock = setInterval(function() {
-      console.log("from inside clock");
-      setSeconds(prev => prev + 1);
-    }, 1000);
-    // cleanup functions
+//   useEffect(function() {
+//     let clock = setInterval(function() {
+//       console.log("from inside clock");
+//       setSeconds(prev => prev + 1);
+//     }, 1000);
+//     // cleanup functions
 
-    return function() {
-      clearInterval(clock);
-    }
-  }, []);
+//     return function() {
+//       clearInterval(clock);
+//     }
+//   }, []);
 
-  return <div>{seconds} seconds elapsed</div>;
+//   return <div>{seconds} seconds elapsed</div>;
+// };
+
+// export default App
+
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+
+// import React from 'react';
+
+// const Card = ({ children }) => {
+//     return (
+//         <div style={{
+//             border: '1px solid #ccc',
+//             borderRadius: '5px',
+//             padding: '20px',
+//             margin: '10px',
+//             boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+//         }}>
+//             {children}
+//         </div>
+//     );
+// };
+
+// const App = () => {
+//     return (
+//         <div>
+//             <Card>
+//                 <h2>Card Title</h2>
+//                 <p>This is some content inside the card.</p>
+//             </Card>
+//             <Card>
+//                 <h2>Another Card</h2>
+//                 <textarea type="text"></textarea>
+//                 <p>This card has different content!</p>
+//             </Card>
+//         </div>
+//     );
+// };
+
+// export default App;
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+
+
+// import React, { Component } from 'react';
+
+// const App = () => {
+//     return (
+//       <div>
+//         {<ClassCounter/>}
+//       </div>
+//     );
+// };
+
+
+// class ClassCounter extends Component {
+//     state = { count: 0 };
+
+//     increment = () => {
+//         this.setState({ count: this.state.count + 1 });
+//     };
+
+//     render() {
+//         return (
+//             <div>
+//                 <p>Count: {this.state.count}</p>
+//                 <button onClick={this.increment}>Increment</button>
+//             </div>
+//         );
+//     }
+// }
+
+
+// export default App;
+
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+
+// import React, { useState, useEffect } from 'react';
+
+// const App = () => {
+//   const [isComponentShown, setIsComponentSHown] = useState(true);
+
+//   return (
+//     <div>
+//       {isComponentShown && <MyComponent />}
+//     </div>
+//   )
+// }
+
+// function MyComponent() {
+//   const [count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     console.log('Component mounted or count updated');
+
+//   }, [count]); // Runs on mount and when count changes
+
+// 	useEffect(() => {
+// 		    console.log('Component mounted');
+//     return () => {
+//       console.log('Component will unmount');
+//     };
+// 	}, [])
+
+//   return (
+//     <div>
+//       <p>Count: {count}</p>
+//       <button onClick={() => setCount(count + 1)}>Increment</button>
+//     </div>
+//   );
+// }
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+// import React, { useState, useEffect } from "react";
+// const App = () => {
+
+//   return (
+//     <div>
+//       <ErrorBoundary>
+//         <Card1/>
+//       </ErrorBoundary>
+//       <ErrorBoundary>
+//         <Card2/>
+//       </ErrorBoundary>
+//     </div>
+//   );
+// };
+
+// function Card1 () {
+
+//   // throw new Error ("Error while rendering")
+//   return <div style={{background: "red", borderRadius: 20, padding: 20}}>
+//     hi there 
+//   </div>
+// }
+
+// function Card2 () {
+
+//   // throw new Error ("Error while rendering")
+//   return <div style={{background: "red", borderRadius: 20, padding: 20, margin: 20}}>
+//     hello
+//   </div>
+// }
+
+
+
+
+// class ErrorBoundary extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = { hasError: false };
+//     }
+
+//     static getDerivedStateFromError(error) {
+//         return { hasError: true };
+//     }
+
+//     componentDidCatch(error, info) {
+//         console.error("Error caught:", error, info);
+//     }
+
+//     render() {
+//         if (this.state.hasError) {
+//             return <div style={{background: "red", borderRadius: 20, padding: 20}}>
+//                 Something went wrong
+//               </div>
+//                 }
+
+//         return this.props.children; 
+//     }
+// }
+
+
+// export default App;
+
+
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+
+import React, { Fragment, useState, useEffect } from 'react';
+
+function App (){
+
+
+  return ( 
+      <>
+          <div>hi there</div>
+          <div>hello</div>
+      </>
+    )
 };
 
-export default App
+export default App;
+
+// =====================================================================================================================
+// =====================================================================================================================
+// =====================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
