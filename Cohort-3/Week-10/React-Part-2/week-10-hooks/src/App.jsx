@@ -183,89 +183,114 @@
 
 
 
-import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 
-function App () {
+// function App () {
   
-  return <div>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />} >
-          <Route path="/neet/online-coaching-class-11" element={<Class11Program />} />
-          <Route path="/neet/online-coaching-class-12" element={<Class12Program />} />
-          <Route path="/" element={<Landing/>}/>
-          <Route path="*" element={<ErrorPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </div>
-}
+//   return <div>
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<Layout />} >
+//           <Route path="/neet/online-coaching-class-11" element={<Class11Program />} />
+//           <Route path="/neet/online-coaching-class-12" element={<Class12Program />} />
+//           <Route path="/" element={<Landing/>}/>
+//           <Route path="*" element={<ErrorPage />} />
+//         </Route>
+//       </Routes>
+//     </BrowserRouter>
+//   </div>
+// }
 
-function Layout() {
-  return <div style={{height: "100vh", backgroundColor: "orange"}}>
+// function Layout() {
+//   return <div style={{height: "100vh", backgroundColor: "orange"}}>
     
-    <Header />
-    <div style={{height: "90vh", backgroundColor: "pink"}}>
-      <Outlet />
-    </div>
+//     <Header />
+//     <div style={{height: "90vh", backgroundColor: "pink"}}>
+//       <Outlet />
+//     </div>
 
-    footer
-  </div>
-}
+//     footer
+//   </div>
+// }
 
-function Header() {
-  return <div>
-    <Link to="/"> Allen </Link>
-    <Link to="/neet/online-coaching-class-11"> Class 11 </Link>
-    <Link to="/neet/online-coaching-class-12"> Class 12 </Link>
-  </div>
-}
+// function Header() {
+//   return <div>
+//     <Link to="/"> Allen </Link>
+//     <Link to="/neet/online-coaching-class-11"> Class 11 </Link>
+//     <Link to="/neet/online-coaching-class-12"> Class 12 </Link>
+//   </div>
+// }
 
-function Landing() {
-  return <div>
-    Welcome to Allen
-  </div>
-}
+// function Landing() {
+//   return <div>
+//     Welcome to Allen
+//   </div>
+// }
 
-function Class11Program() {
-  return <div>
-    NEET programs for Class 11th
-  </div>
-}
+// function Class11Program() {
+//   return <div>
+//     NEET programs for Class 11th
+//   </div>
+// }
 
-function Class12Program() {
-  const navigate = useNavigate();
+// function Class12Program() {
+//   const navigate = useNavigate();
 
-  function redirectUser() {
-    navigate("/");
+//   function redirectUser() {
+//     navigate("/");
+//   }
+//   return <div>
+//     NEET programs for Class 12th<br/>
+//     <button onClick={redirectUser}>Go back to landing page</button>
+//   </div>
+// }
+
+// function ErrorPage() {
+//   return <div>
+//     Sorry, page not found
+//   </div>
+// }8
+
+// export default App;
+
+
+
+// ===================================================================================================================
+// ===================================================================================================================
+// ===================================================================================================================
+// ===================================================================================================================
+
+
+import "./App.css"
+import { useRef, useState } from "react"
+
+
+// useRef 
+// reference to a value, such that when u change the value, the component DOES NOT RE-RENDER
+
+function App() {
+  // let value = 1
+  const [value, setValue] = useState("raman");
+  const inputRef = useRef();
+
+
+
+  function focusOnInput() {
+    // document.getElementById("name").focus();
+    inputRef.current.focus();
   }
+
   return <div>
-    NEET programs for Class 12th<br/>
-    <button onClick={redirectUser}>Go back to landing page</button>
+    Sign up
+    <input ref={inputRef} type={"text"}></input>
+    <input type={"text"}></input>
+    <button onClick={focusOnInput}>Submit!</button>
   </div>
 }
 
-function ErrorPage() {
-  return <div>
-    Sorry, page not found
-  </div>
-}
-
-export default App;
 
 
-
-// ===================================================================================================================
-// ===================================================================================================================
-// ===================================================================================================================
-// ===================================================================================================================
-
-
-
-
-
-
-
+export default App
 
 
 
