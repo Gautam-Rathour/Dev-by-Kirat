@@ -90,25 +90,80 @@
 
 
 
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
+// import './App.css'
+// import { usePrev } from './hooks/use-prev'
+
+// function App() {
+//   const [state, setState] = useState(0);
+//   const prev = usePrev(state);
+
+//   return (
+//     <>
+//     <p>{state}</p>
+//     <button onClick={() => setState((curr) => curr + 1)}>Click me!</button>
+
+//     <p>The previous value was { prev }</p>
+//     </>
+//   )
+// }
+
+
+// export default App;
+
+
+
+// =====================================================================================
+// =====================================================================================
+// =====================================================================================
+// =====================================================================================
+
+
+
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
-import { usePrev } from './hooks/use-prev'
+
+
+const useDebounce = (value, delay) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
+
+
 
 function App() {
-  const [state, setState] = useState(0);
-  const prev = usePrev(state);
+  const [inputVal, setInputVal] = useState("");
+  const debouncedValue = useDebounce(inputVal, 200)
+
+  function change(e) {
+    setInputVal(e.target.value)
+  }
+
+
+  useEffect(() => {
+    // expensive operation 
+    // fetch
+    console.log("expensive operation")
+  }, [debouncedValue])
+
 
   return (
     <>
-    <p>{state}</p>
-    <button onClick={() => setState((curr) => curr + 1)}>Click me!</button>
-
-    <p>The previous value was { prev }</p>
+    <input type="text" onChange={change}></input>
     </>
   )
 }
 
 
 export default App;
-
-
