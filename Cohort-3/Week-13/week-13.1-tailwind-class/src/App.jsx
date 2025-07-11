@@ -1,27 +1,27 @@
 
-// import './App.css'
+import './App.css'
 
-// function App() {
+function App() {
 
-//   return (
-//     <>
-//       {/* <div style={{display: "flex", justifyContent: "center"}}> */}
-//       <div className="grid grid-cols-10">
-//         <div className="bg-blue-300 col-span-3">
-//           child 1
-//         </div>
-//         <div className="bg-red-300 col-span-6">
-//           child 2
-//         </div>
-//         <div className="bg-green-300 col-span-1">
-//           child 3
-//         </div>
-//       </div>
-//     </>
-//   )
-// }
+  return (
+    <>
+      {/* <div style={{display: "flex", justifyContent: "center"}}> */}
+      <div className="grid grid-cols-10">
+        <div className="bg-blue-300 col-span-3">
+          child 1
+        </div>
+        <div className="bg-red-300 col-span-6">
+          child 2
+        </div>
+        <div className="bg-green-300 col-span-1">
+          child 3
+        </div>
+      </div>
+    </>
+  )
+}
 
-// export default App
+export default App
 
 
 // ================================================================================================================
@@ -135,28 +135,28 @@
 // ================================================================================================================
 
 
-import Button from './components/Buttons';
-import Input from './components/Input';
-import Otp from './components/Otp';
+// import Button from './components/Buttons';
+// import Input from './components/Input';
+// import Otp from './components/Otp';
 
 
 
-function App() {
+// function App() {
 
-  return (
-    <div className="h-screen bg-blue-700">
-      {/* <Input type='text' placeholder={"Username"}></Input>
-      <Button disabled={true}>Sign up</Button> */}
-
-
-        <br/><br/><br/><br/>
-      <Otp />
-    </div>
-  )
-}
+//   return (
+//     <div className="h-screen bg-blue-700">
+//       {/* <Input type='text' placeholder={"Username"}></Input>
+//       <Button disabled={true}>Sign up</Button> */}
 
 
-export default App
+//         <br/><br/><br/><br/>
+//       <Otp />
+//     </div>
+//   )
+// }
+
+
+// export default App
 
 
 

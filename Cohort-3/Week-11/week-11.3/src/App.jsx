@@ -1,44 +1,40 @@
-import React from "react"; 
-import { RecoilRoot, useRecoilValue, useRecoilState } from "recoil";
-import { networkAtom, jobsAtom, messagingAtom, notificationsAtom, totalNotificationSelector } from "./atoms";
-import "./App.css";
+
+import './App.css'
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { notifications, totalNotificationSelector } from './atoms'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 function App() {
-  return (
-    <RecoilRoot>
-      <MainApp />
-    </RecoilRoot>
-  );
+  return <RecoilRoot>
+    <MainApp />
+  </RecoilRoot>
 }
 
 function MainApp() {
-  const networkNotificationCount = useRecoilValue(networkAtom);
-  const jobsAtomCount = useRecoilValue(jobsAtom);
-  const notificationsAtomCount = useRecoilValue(notificationsAtom);
-  const messagingAtomCount = useRecoilValue(messagingAtom);
+  const [networkCount, setNetworkCount] = useRecoilState(notifications)
   const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
-  // const totalNotificationCount = useMemo(() => {
-  //   return networkNotificationCount + jobsAtomCount + notificationsAtomCount + messagingAtomCount;
-  // }, [networkNotificationCount, jobsAtomCount, notificationsAtomCount, messagingAtomCount]) 
+  useEffect(() => {
+    // fetch
+    axios.get("https://sum-server.100xdevs.com/notifications")
+      .then(res => {
+        setNetworkCount(res.data)
+      })
+  }, [])
 
   return (
     <>
       <button>Home</button>
-      <button>
-        My Network ({networkNotificationCount >= 100 ? "99+" : networkNotificationCount})
-      </button>
-      <button>Jobs ({jobsAtomCount >= 100 ? "99+" : jobsAtomCount})</button>
-      <button>Messaging ({messagingAtomCount >= 100 ? "99+" : messagingAtomCount})</button>
-      <button>Notifications ({notificationsAtomCount >= 100 ? "99+" : notificationsAtomCount})</button>
-      <button>Me({totalNotificationCount})</button>
+      
+      <button>My network ({networkCount.network >= 100 ? "99+" : networkCount.network})</button>
+      <button>Jobs ({networkCount.jobs})</button>
+      <button>Messaging ({networkCount.messaging})</button>
+      <button>Notifications ({networkCount.notifications})</button>
+
+      <button>Me ({totalNotificationCount})</button>
     </>
   )
 }
 
-export default App;
-
-
-
-
-
+export default App

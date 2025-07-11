@@ -11,7 +11,6 @@ const { JWT_ADMIN_PASSWORD } = require("../config");
 const { adminMiddleware } = require('../middleware/admin');
 
 
-
 // auth, jsonwebtoken, zod
 
 
@@ -25,6 +24,7 @@ adminRouter.post("/signup", async function(req, res) {
         firstName: z.string().min(5).max(30),
         lastName: z.string().min(5).max(10)
     });
+
 
     const parseDataWithSuccess = requiredBody.safeParse(req.body);
 

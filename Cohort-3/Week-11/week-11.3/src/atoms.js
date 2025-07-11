@@ -1,33 +1,30 @@
-import { atom , selector } from "recoil";
+import axios from "axios";
+import { atom, selector } from "recoil";
 
-export const networkAtom = atom({
-  key: "networkAtom",
-  default: 102,
+export const notifications = atom({
+    key: "notificationsAtom",
+    default: selector({
+        key: "notificationsAtomSelector",
+        get: async () => {
+  const res = await axios.get("https://jsonplaceholder.typicode.com/users/1");
+  return {
+    network: 5,
+    jobs: 3,
+    notifications: 10,
+    messaging: 1
+  };
+}
+
+    })
 });
-
-export const jobsAtom = atom({
-  key: "jobsAtom",
-  default: 0,
-});
-
-export const messagingAtom = atom({
-  key: "messagingAtom",
-  default: 0,
-});
-
-export const notificationsAtom = atom({
-  key: "notificationsAtom",
-  default: 12,
-});
-
 
 export const totalNotificationSelector = selector({
     key: "totalNotificationSelector",
     get: ({get}) => {
-        const networkAtomCount = get(networkAtom);
-        const jobsAtomCount = get(jobsAtom);
-        const notificationsAtomCount = get(notificationsAtom);
-        const messagingAtomCount = get(messagingAtom);
-        return networkAtomCount + jobsAtomCount + notificationsAtomCount + messagingAtomCount;
+        const allNotifications = get(notifications);
+        return allNotifications.network + 
+        allNotifications.jobs + 
+        allNotifications.notifications + 
+        allNotifications.messaging
     }
 })

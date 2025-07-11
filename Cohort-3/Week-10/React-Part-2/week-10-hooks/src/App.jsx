@@ -261,43 +261,87 @@
 // ===================================================================================================================
 
 
-import "./App.css"
-import { useRef, useState } from "react"
+// import "./App.css"
+// import { useRef, useState } from "react"
 
 
-// useRef 
-// reference to a value, such that when u change the value, the component DOES NOT RE-RENDER
+// // useRef 
+// // reference to a value, such that when u change the value, the component DOES NOT RE-RENDER
 
-function App() {
-  // let value = 1
-  const [value, setValue] = useState("raman");
-  const inputRef = useRef();
-
-
-
-  function focusOnInput() {
-    // document.getElementById("name").focus();
-    inputRef.current.focus();
-  }
-
-  return <div>
-    Sign up
-    <input ref={inputRef} type={"text"}></input>
-    <input type={"text"}></input>
-    <button onClick={focusOnInput}>Submit!</button>
-  </div>
-}
+// function App() {
+//   // let value = 1
+//   const [value, setValue] = useState("raman");
+//   const inputRef = useRef();
 
 
 
-export default App
+//   function focusOnInput() {
+//     // document.getElementById("name").focus();
+//     inputRef.current.focus();
+//   }
+
+//   return <div>
+//     Sign up
+//     <input ref={inputRef} type={"text"}></input>
+//     <input type={"text"}></input>
+//     <button onClick={focusOnInput}>Submit!</button>
+//   </div>
+// }
+
+
+
+// export default App
+
+
+
+// // ===================================================================================================================
+// // ===================================================================================================================
+// // ===================================================================================================================
+// // ===================================================================================================================
 
 
 
 
+// import { useState, useRef } from 'react'
+// import "./App.css"
+
+
+// function App() {
+//   const [currentCount, setCurrentCount] = useState(1);
+//   const timer = useRef();
+
+//   function startClock() {
+//     let value = setInterval(function() {
+//       setCurrentCount(c => c + 1);
+//     }, 1000);
+    
+//     timer.current = value;
+//   }
+
+//   function stopClock() {
+//     clearInterval(timer.current);
+//   }
+
+
+//   return <div>
+//     {currentCount}
+//     <br/><br/>
+//     <button onClick={startClock}>Start</button> &nbsp;
+//     <button onClick={stopClock}>Stop</button>
+//   </div>
+
+// }
 
 
 
+// export default App
+
+
+
+// ===================================================================================================================
+// ===================================================================================================================
+// ===================================================================================================================
+// ===================================================================================================================
 
 
 
