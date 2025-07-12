@@ -33,11 +33,16 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-// import mongoDB_URL from "../.env";
-mongoose_1.default.connect("mongodb+srv://gautam:od3aYN8bBZGHv8DQ@cluster0.obw8w.mongodb.net/brainly")
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const mongoDB_URL = process.env.MONGODB_URL;
+mongoose_1.default.connect(mongoDB_URL)
     .then(() => {
     console.log("successfully connected to mongoDB");
 })

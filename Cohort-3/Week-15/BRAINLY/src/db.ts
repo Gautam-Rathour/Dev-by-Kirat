@@ -3,12 +3,14 @@
 // create user models and schemas here
 
 import mongoose, { model, Schema } from "mongoose";
-// import mongoDB_URL from "../.env";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 
+const mongoDB_URL = process.env.MONGODB_URL as string;
 
-
-mongoose.connect("mongodb+srv://gautam:od3aYN8bBZGHv8DQ@cluster0.obw8w.mongodb.net/brainly")
+mongoose.connect(mongoDB_URL)
 .then(() => {
     console.log("successfully connected to mongoDB");
 })
