@@ -5,11 +5,9 @@ import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import z from "zod";
 import { UserModel } from "./db";
-
-
-
-
-
+import { JWT_SECRET } from "./config"
+import { userMeddleware } from "./middleware";
+import { ContentModel } from "./db";
 
 
 
@@ -40,29 +38,95 @@ app.post("/api/v1/signup", async (req, res) => {
 });
 
 
-app.post("/api/v1/signin", (req, res) => {
+
+app.post("/api/v1/signin", async (req, res) => {
     const username = req.body.username;
+    const password = req.body.password;
+    const existingUser = await UserModel.findOne({username: username});
+
+    if(existingUser) {
+        const token = jwt.sign({
+            id: existingUser._id
+        }, JWT_SECRET);
+
+        res.json({
+            token: token
+        })
+    } else {
+        res.status(401).json({
+            message: "Incorrect credentials"
+        })
+    }
+});
+
+app.post("/api/v1/content", userMeddleware, async (req, res) => {
+    const link = req.body.link;
+    const type = req.body.type;
+    await ContentModel.create({
+        link: link,
+        type: type,
+        // @ts-ignore
+        userId: req.userId,
+        tags: []
+    })
+
+    res.json({
+        message: "Content Added!"
+    })
 })
 
 
-app.post("/api/v1/content", (req, res) => {
-    console.log("Post this content content");
-})
+
+app.get("/api/v1/content", userMeddleware, async (req, res) => {
+    // @ts-ignore
+    const userId = req.userId;
+    const content = await ContentModel.find({
+        userId: userId
+    }).populate("userId", "username")
+    res.json({
+        content: content
+    })
+});
 
 
-app.get("/api/v1/content", (req, res) => {
-    console.log("This is your content");
-    res.send("This is you main page");
-})
+app.delete("/api/v1/content", userMeddleware, async (req, res) => {
+    const contentId = req.body.contentId;
 
-
-app.delete("/api/v1/content", (req, res) => {
+    await ContentModel.deleteMany({
+        contentId: contentId,
+        // @ts-ignore
+        userId: req.userId
+    })
     
+    res.json({
+        message: "Deleted!"
+    })
 })
 
 
-app.post("/api/v1/share", (req, res) => {
+app.post("/api/v1/share", userMeddleware, async (req, res) => {
+    const contentId = req.body.contentId;
     
+    const content = await ContentModel.findOne({
+        contentId: contentId,
+        // @ts-ignore
+        userId: req.userId
+    })
+
+    if(!content) {
+        res.status(404).json({
+            message: "Content not found"
+        })
+    } else {
+        res.json({
+            message: "Content found",
+            content: {
+                title: content.title,
+                link: content.link,
+                contentId: content._id
+            }
+        })
+    }
 })
 
 

@@ -13,7 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = require("./db");
+const config_1 = require("./config");
+const middleware_1 = require("./middleware");
+const db_2 = require("./db");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 // const signupSchema = z.object({
@@ -32,16 +36,48 @@ app.post("/api/v1/signup", (req, res) => __awaiter(void 0, void 0, void 0, funct
         message: "User signed up"
     });
 }));
-app.post("/api/v1/signin", (req, res) => {
+app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const username = req.body.username;
-});
-app.post("/api/v1/content", (req, res) => {
-    console.log("Post this content content");
-});
-app.get("/api/v1/content", (req, res) => {
-    console.log("This is your content");
-    res.send("This is you main page");
-});
+    const password = req.body.password;
+    const existingUser = yield db_1.UserModel.findOne({ username: username });
+    if (existingUser) {
+        const token = jsonwebtoken_1.default.sign({
+            id: existingUser._id
+        }, config_1.JWT_SECRET);
+        res.json({
+            token: token
+        });
+    }
+    else {
+        res.status(401).json({
+            message: "Incorrect credentials"
+        });
+    }
+}));
+app.post("/api/v1/content", middleware_1.userMeddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const link = req.body.link;
+    const type = req.body.type;
+    yield db_2.ContentModel.create({
+        link: link,
+        type: type,
+        // @ts-ignore
+        userId: req.userId,
+        tags: []
+    });
+    res.json({
+        message: "Content Added!"
+    });
+}));
+app.get("/api/v1/content", middleware_1.userMeddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // @ts-ignore
+    const userId = req.userId;
+    const content = yield db_2.ContentModel.find({
+        userId: userId
+    }).populate("userId");
+    res.json({
+        content: content
+    });
+}));
 app.delete("/api/v1/content", (req, res) => {
 });
 app.post("/api/v1/share", (req, res) => {
