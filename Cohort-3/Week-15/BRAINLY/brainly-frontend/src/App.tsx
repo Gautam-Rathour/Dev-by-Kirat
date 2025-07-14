@@ -1,24 +1,41 @@
 
 import './App.css'
-import { useState } from "react";
 import { Button } from "./components/ui/Button";
 import { PlusIcon } from "./icons/PlusIcon";
-
+import { ShareIcon } from "./icons/ShareIcon";
 
 
 
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Button startIcon={<PlusIcon/>} size="sm" variant="primary" text="Share" />
-      <Button size="md" variant="secondary" text="Add Content" />
-      <Button size="lg" variant="secondary" text="Add Content" />
-      
-    </>
+      <Button 
+        variant="primary"
+        startIcon={<PlusIcon size="lg" />} 
+        endIcon={<ShareIcon size="lg" />}
+        size="lg" 
+        title={"Share"}
+        ></Button>
+
+      <Button 
+        variant="primary"
+        startIcon={<PlusIcon size="md" />} 
+        endIcon={<ShareIcon size="md" />}
+        size="md" 
+        title={"Share"}
+        ></Button>
+
+      <Button 
+        variant="secondary"
+        startIcon={<PlusIcon size="sm" />} 
+        endIcon={<ShareIcon size="sm" />}
+        size="sm" 
+        title={"Share"}
+        ></Button>
+      </>
   )
 }
 
