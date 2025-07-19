@@ -32,26 +32,25 @@
 // ======================================================================================================
 
 
-import { Button } from "../components/Button";
-import { PlusIcon } from "../icons/PlusIcon";
-import { ShareIcon } from "../icons/ShareIcon";
-import { Card } from "../components/Card";
+import { Dashboard } from "../pages/dashboard";
+import { Signup } from "../pages/Signup";
+import { Signin } from "../pages/Signin";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 
 
 function App() {
+  return <BrowserRouter>
+  <Routes>
+    <Route path="/Signup" element={<Signup />}/>
+    <Route path="/Signin" element={<Signin />}/>
+    <Route path="/dashboard" element={<Dashboard />}/>
 
-  return (
-    <div>
-        <Button variant="primary" text="Add Content" startIcon={<PlusIcon />}></Button>
-        <Button variant="secondary" text="Share Brain" startIcon={<ShareIcon />}></Button>
+    </Routes>
+  </BrowserRouter>
 
-        <Card />
-        
-    </div>
-  )
 }
 
-export default App
 
 
-
+export default App;
