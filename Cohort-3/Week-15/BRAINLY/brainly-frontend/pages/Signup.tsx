@@ -17,12 +17,13 @@ export function Signup() {
         console.log(usernameRef.current);
         const password = passwordRef.current?.value;
         await axios.post(BACKEND_URL + "/api/v1/signup", {
-                username: username,
-                password: password
-        })
+                username,
+                password
+        });
         alert("You have signed up");
     }
 
+    
     return <div className="h-screen w-screen bg-gray-200 flex justify-center 
     items-center">
         <div className="bg-white rounded-xl  min-w-48 p-10 ">

@@ -13,7 +13,7 @@ dotenv.config();
 const mongoDB_URL = process.env.MONGODB_URL as string;
 console.log("Mongo URL: -  ", mongoDB_URL);
 
-mongoose.connect('mongodb://127.0.0.1:27017/myapp')
+mongoose.connect('mongodb://127.0.0.1:27017/brainly')
 .then(() => {
     console.log("successfully connected to mongoDB");
 })

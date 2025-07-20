@@ -1,16 +1,22 @@
 
 
-interface InputProps  {
-    placeholder: string; 
-    ref?: any
+
+
+import { forwardRef } from "react";
+
+interface InputProps {
+  placeholder: string;
 }
 
-export function Input({placeholder, ref}: InputProps) {
-    return <div>
-        <input ref={ref} placeholder={placeholder} type={"text"} 
-        className="px-4 py-2 border border-gray-300 rounded m-2">
-        </input>
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { placeholder },
+  ref
+) {
+  return (
+    <div>
+      <input ref={ref} placeholder={placeholder} type="text"
+        className="px-4 py-2 border border-gray-300 rounded m-2"
+      />
     </div>
-}
-
-
+  );
+});
