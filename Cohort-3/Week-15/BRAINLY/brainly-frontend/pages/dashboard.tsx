@@ -11,7 +11,7 @@ import { Sidebar } from "../components/Sidebar";
 
 
 export function Dashboard() {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return <div>
     <Sidebar />
