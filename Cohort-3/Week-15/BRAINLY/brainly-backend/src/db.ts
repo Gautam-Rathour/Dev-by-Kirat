@@ -8,9 +8,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
-const mongoDB_URL = process.env.MONGODB_URL as string;
 
-mongoose.connect(mongoDB_URL)
+
+const mongoDB_URL = process.env.MONGODB_URL as string;
+console.log("Mongo URL: -  ", mongoDB_URL);
+
+mongoose.connect('mongodb://127.0.0.1:27017/myapp')
 .then(() => {
     console.log("successfully connected to mongoDB");
 })
@@ -23,9 +26,11 @@ mongoose.connect(mongoDB_URL)
 
 
 
+
+
 const UserSchema = new Schema({
-    username: {type: String, unique: true},
-    password: String,
+    username: {type: String, unique: true, required: true},
+    password: {type: String, required: true},
 })
 
 

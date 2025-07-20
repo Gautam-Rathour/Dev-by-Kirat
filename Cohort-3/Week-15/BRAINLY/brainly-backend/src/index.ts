@@ -47,6 +47,9 @@ app.post("/api/v1/signup", async (req, res) => {
     res.json({
         message: "User signed up"
     })
+
+    
+    console.log("Received signup request:", req.body);
     
 });
 
