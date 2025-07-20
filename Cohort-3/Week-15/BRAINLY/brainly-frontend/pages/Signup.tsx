@@ -9,18 +9,16 @@ import { BACKEND_URL } from "../src/config";
 
 
 export function Signup() {
-    const usernameRef = useRef<any>();
-    const passwordRef = useRef<any>();
+    const usernameRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
     async function signup () {
         const username = usernameRef.current?.value;
         console.log(usernameRef.current);
         const password = passwordRef.current?.value;
-        await axios.post(BACKEND_URL + "/api/v1/signup",{
-            data: {
+        await axios.post(BACKEND_URL + "/api/v1/signup", {
                 username: username,
                 password: password
-            }
         })
         alert("You have signed up");
     }
