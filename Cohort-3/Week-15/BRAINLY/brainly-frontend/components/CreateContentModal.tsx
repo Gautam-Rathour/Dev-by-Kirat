@@ -35,7 +35,9 @@ export function CreateContentModal({open, onClose}) {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
-        });
+        })
+
+        onClose();
         
     }
     return <div>

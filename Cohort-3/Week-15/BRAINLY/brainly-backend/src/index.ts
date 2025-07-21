@@ -25,7 +25,12 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+    origin: "http://localhost:5173", // frontend port
+    credentials: true
+  }));
+  
 
 
 // const signupSchema = z.object({
@@ -89,8 +94,10 @@ app.post("/api/v1/content", userMeddleware, async (req, res) => {
         tags: []
     })
 
+    console.log("✅ Middleware passed");
+    console.log("Request body:", req.body);
+    console.log("req.userId:", (req as any).userId);
 
-    console.log(req.body);
     res.json({
         message: "Content Added!"
     })
