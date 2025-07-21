@@ -34,6 +34,7 @@ app.use(cors());
 // })
 
 
+
 app.post("/api/v1/signup", async (req, res) => {
     // zod validation
     const username = req.body.username;
@@ -78,14 +79,18 @@ app.post("/api/v1/signin", async (req, res) => {
 app.post("/api/v1/content", userMeddleware, async (req, res) => {
     const link = req.body.link;
     const type = req.body.type;
+    const title = req.body.title;
     await ContentModel.create({
         link: link,
         type: type,
+        title: title,
         // @ts-ignore
         userId: req.userId,
         tags: []
     })
 
+
+    console.log(req.body);
     res.json({
         message: "Content Added!"
     })

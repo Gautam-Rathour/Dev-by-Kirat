@@ -29,13 +29,13 @@ export function CreateContentModal({open, onClose}) {
 
         axios.post(`${BACKEND_URL}/api/v1/content`, {
             link,
-            title,
-            type
+            type,
+            title
         }, {
             headers: {
                 "Authorization": localStorage.getItem("token")
             }
-        })
+        });
         
     }
     return <div>
