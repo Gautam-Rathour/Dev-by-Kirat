@@ -1,5 +1,6 @@
 
 
+
 import { useEffect, useState, useRef } from "react";
 import './App.css'
 
@@ -8,21 +9,17 @@ import './App.css'
 
 
 function App() {
-  const [socket, setSocket] = useState();
+  const [ws, setWs] = useState();
   const inputRef = useRef();
 
+
   function sendMessage() {
-    if(!socket) {
-      return;
-    }
-    const message = inputRef.current.value;
-    //@ts-ignore
-    socket.send(message)
+    ws.send("ping");
   }
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:8080");
-    setSocket(ws);
+    setWs(ws);
 
     ws.onmessage = (ev) => {
       alert(ev.data);
