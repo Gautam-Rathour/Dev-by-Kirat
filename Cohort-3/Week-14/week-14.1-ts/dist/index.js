@@ -38,15 +38,15 @@
 // ==============================================================
 // ==============================================================
 // ==============================================================
-function greet(user) {
-    console.log("hello, " + user.name);
-}
-// greet({
-//     name: "Kirat",
+// function greet(user) {
+//     console.log("hello, " + user.name);
+// }
+// // greet({
+// //     name: "Kirat",
+// //     age: 21,
+// // })
+// let user = {
+//     name: "kirat",
 //     age: 21,
-// })
-let user = {
-    name: "kirat",
-    age: 21,
-};
-greet(user);
+// };
+// greet(user);
