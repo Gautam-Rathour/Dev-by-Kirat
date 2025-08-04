@@ -1,3 +1,6 @@
+
+
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+  id       Int    @id @default(autoincrement())  // primary key
+  username String @unique                       // must be unique
   password String
   age      Int
   city     String
-  todos    Todo[]
+  todos    Todo[]                               // 1-to-many relation
 }
+
 
 model Todo {
   id          Int     @id @default(autoincrement())
@@ -24,3 +28,4 @@ model Todo {
   userId      Int
   user        User    @relation(fields: [userId], references: [id])
 }
+
