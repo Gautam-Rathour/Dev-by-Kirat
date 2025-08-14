@@ -1,4 +1,8 @@
 
+
+
+
+
 export default async function Blog({params}: {
     params: Promise<{
         blogId: string
@@ -10,5 +14,7 @@ export default async function Blog({params}: {
     return <div>
         {blogId}
     </div>
-
 }
+
+
+
