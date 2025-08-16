@@ -3,6 +3,9 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 
+
+
+console.log(process.env.NEXTAUTH_SECRET);
 const handler = NextAuth({
     providers: [
         CredentialsProvider({
@@ -18,9 +21,10 @@ const handler = NextAuth({
                     id: "1",
                     email: "example@gmail.com"
                 }
-            }
+            },
         })
-    ]
+    ],
+    secret: process.env.NEXTAUTH_SECRET
 });
 
 
