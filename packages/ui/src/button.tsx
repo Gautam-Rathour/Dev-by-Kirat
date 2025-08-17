@@ -1,14 +1,18 @@
+
+
+
+
 "use client";
 
 import { ReactNode } from "react";
 
-interface ButtonProps {
-  children: ReactNode;
-  className?: string;
-  appName: string;
-}
+// interface ButtonProps {
+//   children: ReactNode;
+//   className?: string;
+//   appName: string;
+// }
 
-export const Button = ({ children, className, appName }: ButtonProps) => {
+export const Button = ({ children, className, appName }: any) => {
   return (
     <button
       className={className}
