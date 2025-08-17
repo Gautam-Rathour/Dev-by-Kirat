@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>The Time is :-</h1>
+        <h2 id="time"></h2>
+        <button id="stop-btn">Stop Timer</button>
+    </div>
+
+    <!-- <script src="response.js">  -->
+
+
+    <script> 
+
+        const button = document.getElementById("stop-btn");
+
+        function showTime() {
+            
+            const currentTime = new Date;
+            const time = `${currentTime.getHours()} : ${currentTime.getMinutes()} : ${currentTime.getSeconds()}`
+            console.log(time);
+            const showtime = document.getElementById("time");
+            showtime.innerText = time;
+        }
+
+
+        const interval = setInterval(showTime, 1000);
+
+        button.addEventListener("click",() => {
+            clearInterval(interval);
+        })   
+
+       
+    </script>
+</body>
+</html>
